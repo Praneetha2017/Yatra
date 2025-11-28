@@ -1,16 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Header from './components/Header.jsx';
-import Footer from './components/Footer.jsx';
 import Login from './components/Login.jsx';
-import Signup from './components/Signup.jsx';
-import MiddlePage from './components/MiddlePage.jsx';
-import TourGuideForm from './components/TourGuideForm.jsx';
-import WomenSafetyForm from './components/WomenSafetyForm.jsx';
-import AdminPanel from './components/AdminPanel.jsx';
-import InnerPage from './components/InnerPage.jsx';
-import About from './components/About.jsx'; 
-import Contact from './components/Contact.jsx';
+import Signup from './components/SignUp.jsx';
 
 
 const App = () => {

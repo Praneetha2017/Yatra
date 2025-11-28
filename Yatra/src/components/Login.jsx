@@ -1,74 +1,108 @@
-import React from 'react';
+// Login.jsx
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { mockUsers } from './SignUp';
 
 const Login = () => {
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+
     const navigate = useNavigate();
 
     const handleLogin = (e) => {
         e.preventDefault();
-       
-        navigate('/discover'); 
-    };
 
-    const containerStyle = {
-        
-        flexGrow: 1, 
-        backgroundColor: 'black',
-        color: 'white',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        padding: '50px 0',
-    };
+        const user = mockUsers.get(username);
 
-    const formBoxStyle = {
-        backgroundColor: 'black',
-        padding: '40px',
-        borderRadius: '8px',
-        width: '300px',
-        textAlign: 'center',
-        marginTop: '30px',
-    };
+        if (!user) {
+            alert("User not found!");
+            return;
+        }
 
-    const inputStyle = {
-        width: '100%',
-        padding: '10px',
-        margin: '10px 0',
-        borderRadius: '4px',
-        border: '1px solid #555',
-        boxSizing: 'border-box',
-        backgroundColor: '#444',
-        color: 'white',
-    };
+        if (user.password !== password) {
+            alert("Incorrect password!");
+            return;
+        }
 
-    const buttonStyle = {
-        width: '100%',
-        padding: '10px',
-        marginTop: '20px',
-        backgroundColor: '#e0b533',
-        border: 'none',
-        borderRadius: '4px',
-        cursor: 'pointer',
-        fontWeight: 'bold',
+        if (user.role === "Admin") navigate("/admin");
+        else navigate("/discover");
     };
 
     return (
-        <div style={containerStyle}>
-            <div style={{ textAlign: 'center' }}>
-                <h1 style={{ color: '#e0b533' }}>Get Your Historic Trips Planned With Us</h1>
-                <p>Embark on timeless journeys through India's glorious past. Discover monuments, legends, and cultures — all curated for your next unforgettable adventure.</p>
-            </div>
-            
-            <div style={formBoxStyle}>
-                <h2>Login</h2>
+        <div style={{
+            backgroundColor: '#F5F0E6',
+            minHeight: '100vh',
+            paddingTop: '40px'
+        }}>
+
+            {/* CARD ONLY */}
+            <div style={{
+                backgroundColor: '#1F2E2E',
+                padding: '40px',
+                width: '350px',
+                margin: '0 auto',
+                borderRadius: '12px',
+                border: '2px solid #A06A43',
+                color: 'white',
+                boxShadow: '0px 8px 18px rgba(0,0,0,0.35)',
+            }}>
+
+                <h2 style={{ textAlign: 'center', color: '#E35A37' }}>
+                    Welcome Back
+                </h2>
+
+                <p style={{ textAlign: 'center', fontStyle: 'italic' }}>
+                    “Continue your journey through India’s heritage.”
+                </p>
+
                 <form onSubmit={handleLogin}>
-                    <input type="text" placeholder="Username" required style={inputStyle} />
-                    <input type="password" placeholder="Password" required style={inputStyle} />
-                    <button type="submit" style={buttonStyle}>Login</button>
+
+                    <input
+                        type="text"
+                        placeholder="Username"
+                        onChange={(e) => setUsername(e.target.value)}
+                        style={inputStyle}
+                        required
+                    />
+
+                    <input
+                        type="password"
+                        placeholder="Password"
+                        onChange={(e) => setPassword(e.target.value)}
+                        style={inputStyle}
+                        required
+                    />
+
+                    <button type="submit" style={buttonStyle}>
+                        Login
+                    </button>
+
                 </form>
             </div>
         </div>
     );
+};
+
+const inputStyle = {
+    width: '100%',
+    padding: '12px',
+    margin: '12px 0',
+    borderRadius: '6px',
+    border: '1px solid #A06A43',
+    backgroundColor: '#F0ECE3',
+    color: '#102027',
+};
+
+const buttonStyle = {
+    width: '100%',
+    padding: '12px',
+    marginTop: '10px',
+    backgroundColor: '#CF8F2E',
+    border: 'none',
+    borderRadius: '6px',
+    fontWeight: 'bold',
+    color: '#102027',
+    cursor: 'pointer',
 };
 
 export default Login;
